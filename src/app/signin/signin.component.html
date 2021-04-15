@@ -1,0 +1,36 @@
+<div class="row mt-5">
+  <div class="col-sm-12 col-md-4 col-lg-4">
+    <img src="https://acad.xlri.ac.in/evening/images/login.svg"
+         class="img-fluid" alt="">
+  </div>
+  <div class="col-sm-12 col-md-8 col-lg-8 mt-2">
+    <h2 class="text-center">Sign In</h2>
+    <form [formGroup]="signinForm" (ngSubmit)="onSubmit()">
+      <div class="form-group mt-2">
+        <label class="col-sm-2" for="uname">username</label>
+        <input type="text" formControlName="username"  [ngClass]="{ 'is-invalid': submitted && f.username.errors }" class="form-control" required="required" />
+        <div *ngIf="submitted && f.username.errors" class="invalid-feedback">
+          <div *ngIf="f.username.errors.required">Username is required</div>
+          <div *ngIf="f.username.errors.pattern">Username must be a valid</div>
+        </div>
+      </div>
+      <div class="form-group mt-2">
+        <label for="fname" class="col-sm-2">password</label>
+        <input type="password" formControlName="password"  [ngClass]="{ 'is-invalid': submitted && f.password.errors }" class="form-control" required="required" />
+        <div *ngIf="submitted && f.password.errors" class="invalid-feedback">
+          <div *ngIf="f.password.errors.required">Password is required</div>
+          <div *ngIf="f.password.errors.pattern">password must contains minimum eight and maximum 10 characters, at least one uppercase letter, one lowercase letter, one number and one special character</div>
+        </div>
+      </div>
+      <div class="form-group mt-2">
+        <button class="btn btn-primary" type="submit">
+          Sign In
+        </button>
+      </div>
+      <div class="form-group mt-2">
+        <a class="nav-link" routerLink="/signup" routerLinkActive="active">Create Account?</a>
+      </div>
+    </form>
+
+  </div>
+</div>

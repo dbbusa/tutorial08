@@ -1,0 +1,108 @@
+<div class="col-12">
+  <div class="container mt-5">
+    <div class="input-group mb-2">
+      <input type="text" name="title" placeholder="Search" class="form-control" [(ngModel)]="title"
+             (ngModelChange)="searchTitle()" />
+      <button class="input-group-text btn btn-primary" (click)="addrec()"><i class="fa fa-plus"></i> New Video</button>
+    </div>
+
+    <table class="table table-light table-striped table-bordered table-dark">
+      <thead class="bg-dark">
+      <th (click)="sort('title')">Title <i class="fa fa-sort"></i></th>
+      <th (click)="sort('desc')">Description <i class="fa fa-sort"></i></th>
+      <th (click)="sort('posted_by')">Posted By <i class="fa fa-sort"></i></th>
+      <th (click)="sort('cat')">Category <i class="fa fa-sort"></i></th>
+      <th (click)="sort('likes')">Likes <i class="fa fa-sort"></i></th>
+      <th (click)="sort('url')">Url <i class="fa fa-sort"></i></th>
+      <th>Action</th>
+      </thead>
+      <tbody>
+      <tr *ngIf="isAdd">
+        <td><input type="text" class="form-control" placeholder="Title" [(ngModel)]="addVideo.title"></td>
+        <td><input type="text" class="form-control" placeholder="Description" [(ngModel)]="addVideo.desc"></td>
+        <td><input type="text" class="form-control" placeholder="Posted By" [(ngModel)]="addVideo.posted_by"></td>
+        <td><input type="text" class="form-control" placeholder="Category" [(ngModel)]="addVideo.cat"></td>
+        <td><input type="text" class="form-control" placeholder="Likes" [(ngModel)]="addVideo.likes"></td>
+        <td><input type="text" class="form-control" placeholder="URL" [(ngModel)]="addVideo.url"></td>
+        <td>
+          <div class="btn-group">
+            <div class="btn-group" role="group" aria-label="Basic example">
+              <button type="button" class="btn btn-light" (click)="postVideo(addVideo)"> <span class="fa fa-check text-success" ></span></button>
+              <button type="button" class="btn btn-light" (click)="cancelAdd()"><span class="fa fa-times text-info"></span></button>
+            </div>
+          </div>
+        </td>
+      </tr>
+      <tr *ngFor="let video of videos | paginate:{itemsPerPage:5,currentPage:p} | orderBy:key:reverse">
+        <td>
+          <div *ngIf="video.isEdit">
+            <input type="text" class="form-control" [(ngModel)]="video.title">
+          </div>
+          <div *ngIf="!video.isEdit">
+            {{video.title}}
+          </div>
+        </td>
+        <td>
+          <div *ngIf="video.isEdit">
+            <input type="text" class="form-control" [(ngModel)]="video.desc">
+          </div>
+          <div *ngIf="!video.isEdit">
+            {{video.desc}}
+          </div>
+        </td>
+        <td>
+          <div *ngIf="video.isEdit">
+            <input type="text" class="form-control" [(ngModel)]="video.posted_by">
+          </div>
+          <div *ngIf="!video.isEdit">
+            {{video.posted_by}}
+          </div>
+        </td>
+        <td>
+          <div *ngIf="video.isEdit">
+            <input type="text" class="form-control" [(ngModel)]="video.cat">
+          </div>
+          <div *ngIf="!video.isEdit">
+            {{video.cat}}
+          </div>
+        </td>
+        <td>
+          <div *ngIf="video.isEdit">
+            <input type="text" class="form-control" [(ngModel)]="video.likes">
+          </div>
+          <div *ngIf="!video.isEdit">
+            {{video.likes}}
+          </div>
+        </td>
+        <td>
+          <div *ngIf="video.isEdit">
+            <input type="text" class="form-control" [(ngModel)]="video.url">
+          </div>
+          <div *ngIf="!video.isEdit">
+            {{video.url}}
+          </div>
+        </td>
+        <td class="font-weight-bold" style="display: flex;">
+          <div *ngIf="video.isEdit" class="btn-group">
+            <div class="btn-group" role="group" aria-label="Basic example">
+              <button type="button" class="btn btn-light" (click)="update(video)"> <span class="fa fa-check text-success" ></span></button>
+              <button type="button" class="btn btn-light" (click)="cancel(video)"><span class="fa fa-times text-info"></span></button>
+            </div>
+          </div>
+          <div *ngIf="!video.isEdit" class="btn-group">
+            <div class="btn-group" role="group" aria-label="Basic example">
+              <button type="button" class="btn btn-light" (click)="edit(video)"><span class="fa fa-edit text-warning"></span></button>
+              <button type="button" class="btn btn-light" (click)="delete(video._id)"> <span class="fa fa-trash text-danger" ></span></button>
+            </div>
+          </div>
+        </td>
+      </tr>
+      <tr>
+        <td colspan="7" align="right">
+          <pagination-controls class="" (pageChange)="p=$event"></pagination-controls>
+        </td>
+      </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
