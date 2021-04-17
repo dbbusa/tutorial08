@@ -17,7 +17,7 @@
       <th>Action</th>
       </thead>
       <tbody>
-      <tr *ngIf="isAdd">
+      <tr *ngIf="isAdd" @fade>
         <td><input type="text" class="form-control" placeholder="Title" [(ngModel)]="addVideo.title"></td>
         <td><input type="text" class="form-control" placeholder="Description" [(ngModel)]="addVideo.desc"></td>
         <td><input type="text" class="form-control" placeholder="Posted By" [(ngModel)]="addVideo.posted_by"></td>
